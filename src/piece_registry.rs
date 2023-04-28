@@ -1,6 +1,6 @@
 use bevy::{utils::HashMap, prelude::{Resource, Vec2}};
 
-use crate::{position::Position, piece::Piece, board_positions::BoardPositions, iboard_positions::IBoardPositions};
+use crate::{position::Position, piece::Piece, board_positions::BoardPositions};
 
 const ROWS: usize = 8;
 const COLS: usize = 8;

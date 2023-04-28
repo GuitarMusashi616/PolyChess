@@ -1,7 +1,6 @@
 use bevy::prelude::Vec2;
 
-use crate::{position::Position, iboard_positions::IBoardPositions};
-
+use crate::{position::Position};
 
 #[derive(Clone)]
 pub struct BoardPositions {
@@ -25,21 +24,18 @@ impl BoardPositions {
         let base_tile = self.tile_length * index as f32;
         return base_tile - offset + half_tile;
     }
-}
 
-impl IBoardPositions for BoardPositions { 
-    fn get_xy(&self, pos: Position) -> Vec2 {
+    pub fn get_xy(&self, pos: Position) -> Vec2 {
         let y = self.from_index_to_vec2(pos.row);
         let x = self.from_index_to_vec2(pos.col);
         Vec2::new(x, y)
     }
 
-    fn get_background_scale(&self, img_length: f32) -> f32 {
+    pub fn get_background_scale(&self, img_length: f32) -> f32 {
         let size_needed  = self.row_cols as f32 * self.tile_length + self.background_margin;
         size_needed / img_length
     } 
 }
-
 
 #[cfg(test)]
 mod tests {

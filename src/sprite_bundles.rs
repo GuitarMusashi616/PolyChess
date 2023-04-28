@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::{piece::Piece, piece_id::PieceId, piece_type::PieceType, piece_color::PieceColor, create_sprite::create_board_sprite, board_positions::BoardPositions, iboard_positions::IBoardPositions, position::Position};
+use crate::{piece::Piece, piece_id::PieceId, piece_type::PieceType, piece_color::PieceColor, board_positions::BoardPositions, position::Position};
 
 #[derive(Resource)]
 pub struct SpriteBundles {
@@ -43,7 +43,7 @@ impl SpriteBundles {
     pub fn get_piece(&self, piece: &Piece, asset_server: &Res<AssetServer>, texture_atlases: &mut ResMut<Assets<TextureAtlas>>) -> (PieceId, SpriteSheetBundle)  {
         let selection = (&piece.piece_type, &piece.piece_color);
         let sprite_index = Self::piece_type_color_to_sprite_index(selection);
-        let mut sprite = create_board_sprite(sprite_index, asset_server, texture_atlases);
+        let mut sprite = self.create_board_sprite(sprite_index, asset_server, texture_atlases);
         let xy = self.board_positions.get_xy(piece.pos);
         sprite.transform = Transform::from_xyz(xy.x, xy.y, 4.0);
         (PieceId(piece.id), sprite)
