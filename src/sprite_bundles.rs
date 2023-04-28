@@ -31,7 +31,7 @@ impl SpriteBundles {
         }
     }
 
-    pub fn get_background(&self, asset_server: &Res<AssetServer>, texture_atlases: &mut ResMut<Assets<TextureAtlas>>) -> SpriteBundle {
+    pub fn get_background(&self, asset_server: &Res<AssetServer>) -> SpriteBundle {
         let scale = self.board_positions.get_background_scale(self.board_background_px_len);
         SpriteBundle {
             texture: asset_server.load(&self.board_background_path),
