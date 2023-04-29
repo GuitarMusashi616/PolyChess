@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{prelude::*, input::mouse::MouseWheel};
 mod board_positions;
 mod position;
 mod piece_type;
@@ -76,26 +76,11 @@ fn setup_camera(mut commands: Commands) {
         ..default()
     });
 }
-// fn update_camera(time: Res<Time>, mut camera_query: Query<&mut Transform, With<Camera2d>>, keyboard_input: Res<Input<KeyCode>>, mouse_scroll: EventReader<MouseWheel>) {
-//     let mut camera = camera_query.single();
-//     for ev in mouse_scroll.iter() {
-//         match ev.unit {
-//             camera.scale -=  time.delta_seconds() * 10.0;
-//             MouseScrollUnit::Pixel => {
-//                 println!("Scroll (pixel units): vertical: {}, horizontal: {}", ev.y, ev.x);
-//             }
-//         }
-//     }
-// }
 
-fn update_camera(time: Res<Time>, mut camera_query: Query<&mut Transform, With<Camera2d>>, keyboard_input: Res<Input<KeyCode>>) {
-    for mut camera in &mut camera_query {
-        if keyboard_input.pressed(KeyCode::W) {
-            camera.scale -=  time.delta_seconds() * 10.0;
-        }
-        if keyboard_input.pressed(KeyCode::S) {
-            camera.scale +=  time.delta_seconds() * 10.0;
-        }
+fn update_camera(time: Res<Time>, mut camera_query: Query<&mut Transform, With<Camera2d>>, mut mouse_scroll: EventReader<MouseWheel>) {
+    let mut camera = camera_query.single_mut();
+    for ev in mouse_scroll.iter() {
+        camera.scale -=  time.delta_seconds() * ev.y * 10.0;
     }
 }
 
