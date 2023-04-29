@@ -13,9 +13,6 @@ pub struct SpriteBundles {
 
 impl SpriteBundles {
     pub fn new(board_positions: BoardPositions) -> Self {
-        // let board_background_path = "../assets/board_background.png".to_owned();
-        // let sprite_sheet_path = "../assets/default_board.png".to_owned();
-        // let project_path = "C:/Users/awilliams/Code/rust/polychess";
         let project_path = "..";
 
         let board_background_path = format!("{}/{}", project_path, "assets/board_background.png");
